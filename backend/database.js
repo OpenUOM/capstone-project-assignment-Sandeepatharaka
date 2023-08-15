@@ -37,11 +37,11 @@ const readTeachers = async () => {
 }
 
 const readTeacherInfo = async (id) => {
-    const sql = `SELECT * FROM dummyData`
+    const sql = `SELECT * FROM teacher WHERE id = ?`//`SELECT * FROM dummyData`
     return new Promise((resolve, reject) => {
         knex_db
-            .raw(sql)
-            .then((data) => {
+            .raw(sql, [id]/*sql*/)
+            .then((data) => {//need to check what is "data"
                 resolve(data);
             })
             .catch((error) => {
@@ -55,7 +55,7 @@ const addTeacher = async (id, name, age) => {
     return new Promise((resolve, reject) => {
         knex_db
             .raw(sql, [id, name, age])
-            .then((/*data*/) => {
+            .then((/*data*/) => {//remove "data" within brackets then() and resolve()
                 resolve({status: "Successfully inserted Teacher"}/*data*/);
             })
             .catch((error) => {
