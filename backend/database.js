@@ -79,12 +79,12 @@ const updateTeacher = async (name, age, id) => {
 }
 
 const deleteTeacher = async (id) => {
-    const sql = `SELECT * FROM dummyData`
+    const sql = `DELETE FROM teacher WHERE id = ?`//`SELECT * FROM dummyData`
     return new Promise((resolve, reject) => {
         knex_db
-            .raw(sql)
-            .then((data) => {
-                resolve(data);
+            .raw(sql, [id])
+            .then((/*data*/) => {
+                resolve({status: "Successfully deleted Teacher"}/*data*/);
             })
             .catch((error) => {
                 reject(error);
