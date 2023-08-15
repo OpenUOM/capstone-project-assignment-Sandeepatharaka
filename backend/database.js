@@ -135,12 +135,12 @@ const addStudent = async (id, name, age, hometown) => {
 }
 
 const updateStudent = async (name, age, religion, id) => {
-    const sql = `SELECT * FROM dummyData`
+    const sql = `UPDATE student SET name=?, age=?, hometown=? WHERE id=?`//`SELECT * FROM dummyData`
     return new Promise((resolve, reject) => {
         knex_db
-            .raw(sql)
-            .then((data) => {
-                resolve(data);
+            .raw(sql, [id, name, age, hometown])
+            .then((/*data*/) => {
+                resolve({status: "Successfully updated Student"}/*data*/);
             })
             .catch((error) => {
                 reject(error);
